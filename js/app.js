@@ -1,6 +1,7 @@
-/* Núcleo do portal: registro de jogos, página inicial e seleção hierárquica de matérias/recortes. */
+/* Núcleo do portal: registro de jogos, matérias/recortes, modo Solo/Equipes e memes finais. */
 (() => {
   const CATS = ["Língua Portuguesa","Matemática","Ciências","História","Geografia","Conhecimentos Gerais"];
+  const TEAM_COLORS = ["#4f46e5", "#ef476f", "#22b573", "#ff7a3d"];
   const app = () => document.getElementById("app");
   const P = window.Portal = {
     games: [],
@@ -27,7 +28,7 @@
     app().innerHTML = `
     <section class="hero">
       <div><h1>Aprender é um jogo!</h1>
-      <p>Jogos pedagógicos gratuitos para o 2º ao 4º ano do Ensino Fundamental. Escolha a mecânica, filtre pela matéria e selecione o conteúdo exato da sua aula.</p>
+      <p>Jogos pedagógicos gratuitos para o 2º ao 4º ano do Ensino Fundamental. Jogue no modo Solo ou divida a turma em até 4 equipes!</p>
       <button class="btn big" data-scroll="jogos">Escolher um jogo</button></div>
       <div class="mascot" aria-hidden="true"><span>🦉</span><i>📚</i><i>⭐</i><i>🎈</i></div>
     </section>
@@ -40,7 +41,7 @@
     </section>
     <section id="sobre" class="wrap about">
       <h2>Para professores</h2>
-      <p>Cada jogo funciona como um motor de atividade com baralhos organizados por matéria e habilidade específica (2º ao 4º ano). Sem cadastro, sem anúncios e sem coleta de dados.</p>
+      <p>Cada jogo permite escolher a matéria, o recorte específico (2º ao 4º ano) e o modo de disputa (Solo ou 2 a 4 Equipes com nomes personalizados). Sem cadastro e sem anúncios.</p>
     </section>`;
     document.getElementById("q").oninput = e => { q = e.target.value; grid(); };
     chips(); grid();
@@ -66,10 +67,20 @@
       </a>`).join("") : `<p class="empty">Nenhum jogo encontrado com esse filtro.</p>`;
   }
 
+  function getMeme(pct) {
+    if (pct >= .9) return { emoji: "🕺🎉💃", cls: "meme-dance", title: "Dancinha da Vitória!", text: "Mandou muito bem! Nível mestre desbloqueado!" };
+    if (pct >= .6) return { emoji: "👏😎⭐", cls: "meme-clap", title: "Arrasou!", text: "Ótimo desempenho! Continue nesse ritmo!" };
+    if (pct >= .3) return { emoji: "🤔📚💡", cls: "meme-clap", title: "Quase lá!", text: "Você está no caminho certo, bora revisar mais um pouco?" };
+    return { emoji: "🥲🫠📉", cls: "meme-sad", title: "Deu ruim dessa vez...", text: "Não desanima! Até os gênios erram antes de acertar." };
+  }
+
   function gameView(id) {
     const g = P.games.find(x => x.id === id);
     if (!g) { location.hash = "#/"; return; }
     let currentTopic = null, selSub = "Todas", topicSearch = "";
+    let teamCount = 1; // 1 = Solo, 2..4 = Equipes
+    let teamNames = ["Equipe Azul", "Equipe Vermelha", "Equipe Verde", "Equipe Laranja"];
+    let teams = [], turn = 0, observer = null;
 
     app().innerHTML = `<section class="gv">
       <div class="bar">
@@ -80,9 +91,11 @@
           <button class="btn ghost" id="rs">↻ Reiniciar</button>
         </div>
       </div>
+      <div id="sb-wrap"></div>
       <div id="st" class="stage"></div></section>`;
 
     const st = document.getElementById("st");
+    const sbWrap = document.getElementById("sb-wrap");
     const tpBtn = document.getElementById("tp");
     document.getElementById("rs").onclick = () => currentTopic ? start(currentTopic) : intro();
     if (tpBtn) tpBtn.onclick = () => pickTopic();
@@ -90,17 +103,40 @@
 
     function intro() {
       currentTopic = null;
+      if (observer) { observer.disconnect(); observer = null; }
+      sbWrap.innerHTML = "";
       if (tpBtn) tpBtn.style.display = "none";
       document.getElementById("gtitle").textContent = g.name;
+
+      const renderTeamSetup = () => {
+        const box = st.querySelector("#team-setup");
+        box.innerHTML = `
+          <strong>👥 Modo de jogo:</strong>
+          <div class="team-modes">
+            ${[1, 2, 3, 4].map(n => `<button type="button" class="tmode ${teamCount === n ? "on" : ""}" data-n="${n}">${n === 1 ? "🧑 Solo" : `🏆 ${n} Equipes`}</button>`).join("")}
+          </div>
+          ${teamCount > 1 ? `<div class="team-inputs">
+            ${Array.from({ length: teamCount }, (_, i) => `<input type="text" maxlength="20" data-ti="${i}" value="${teamNames[i]}" placeholder="Nome da Equipe ${i + 1}" style="border-color:${TEAM_COLORS[i]}">`).join("")}
+          </div>` : `<small class="meta">Jogue individualmente e acompanhe sua pontuação final.</small>`}`;
+
+        box.querySelectorAll(".tmode").forEach(b => b.onclick = () => { teamCount = +b.dataset.n; renderTeamSetup(); });
+        box.querySelectorAll("input").forEach(inp => inp.oninput = e => { teamNames[+e.target.dataset.ti] = e.target.value || `Equipe ${+e.target.dataset.ti + 1}`; });
+      };
+
       st.innerHTML = `<div class="intro"><div class="big-ico" style="background:${g.color}">${g.icon}</div>
         <h1>${g.name}</h1><p>${g.description}</p>
         <div class="how"><h3>Como jogar</h3><ol>${g.instructions.map(i => `<li>${i}</li>`).join("")}</ol></div>
+        <div class="team-box" id="team-setup"></div>
         <p class="meta">${g.grade} · ${g.topics ? g.topics.length + " recortes temáticos disponíveis" : g.category}</p>
         <button class="btn big" id="go">▶ Escolher matéria e assunto</button></div>`;
+
+      renderTeamSetup();
       document.getElementById("go").onclick = () => g.topics ? pickTopic() : start(null);
     }
 
     function pickTopic() {
+      if (observer) { observer.disconnect(); observer = null; }
+      sbWrap.innerHTML = "";
       if (tpBtn) tpBtn.style.display = "none";
       document.getElementById("gtitle").textContent = g.name;
       const subjects = ["Todas", ...new Set(g.topics.map(t => t.subject || g.category))];
@@ -138,19 +174,84 @@
       renderTopics();
     }
 
+    function renderScoreboard() {
+      if (teamCount <= 1) { sbWrap.innerHTML = ""; return; }
+      sbWrap.innerHTML = `
+        <div class="scoreboard">
+          ${teams.map((t, idx) => `
+            <button type="button" class="tbadge ${idx === turn ? "turn" : ""}" data-t="${idx}" title="Clique para passar a vez para ${t.name}">
+              <span class="dot" style="background:${t.color}"></span>
+              <span>${t.name}:</span>
+              <b>${t.score} pts</b>
+            </button>`).join("")}
+        </div>
+        <div class="turn-banner">🎯 Vez de: <u>${teams[turn].name}</u> (clique em uma equipe para trocar a vez manualmente)</div>`;
+      sbWrap.querySelectorAll(".tbadge").forEach(b => b.onclick = () => { turn = +b.dataset.t; renderScoreboard(); });
+    }
+
     function start(topic) {
       currentTopic = topic;
+      if (observer) { observer.disconnect(); observer = null; }
+      teams = Array.from({ length: teamCount }, (_, i) => ({
+        name: (teamNames[i] || `Equipe ${i + 1}`).trim(),
+        score: 0,
+        color: TEAM_COLORS[i]
+      }));
+      turn = 0;
+      renderScoreboard();
+
       if (tpBtn && g.topics) tpBtn.style.display = "inline-block";
       document.getElementById("gtitle").textContent = topic ? `${g.name} · ${topic.title}` : g.name;
       st.innerHTML = "";
+
+      if (teamCount > 1) {
+        let lastCounted = null;
+        observer = new MutationObserver(() => {
+          const goodFb = st.querySelector(".fb.good");
+          const wrongFb = st.querySelector(".fb.wrong");
+          const target = goodFb || wrongFb;
+          if (target && target !== lastCounted) {
+            lastCounted = target;
+            if (goodFb) teams[turn].score += 10;
+            turn = (turn + 1) % teams.length;
+            renderScoreboard();
+          }
+        });
+        observer.observe(st, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+      }
+
       g.mount(st, { end, topic });
     }
 
     function end(r) {
-      const pct = r.total ? r.hits / r.total : 0, stars = pct >= .9 ? 3 : pct >= .6 ? 2 : pct > 0 ? 1 : 0;
-      st.innerHTML = `<div class="intro result"><div class="stars">${"⭐".repeat(stars)}${"☆".repeat(3 - stars)}</div>
-        <h1>${pct >= .6 ? "Muito bem!" : "Boa tentativa!"}</h1>
-        <div class="stats"><div><b>${r.hits}</b>acertos</div><div><b>${r.errors}</b>erros</div>${r.score != null ? `<div><b>${r.score}</b>pontos</div>` : ""}</div>
+      if (observer) { observer.disconnect(); observer = null; }
+      sbWrap.innerHTML = "";
+      const pct = r.total ? r.hits / r.total : 0;
+      const stars = pct >= .9 ? 3 : pct >= .6 ? 2 : pct > 0 ? 1 : 0;
+      const meme = getMeme(pct);
+
+      let podiumHtml = "";
+      if (teamCount > 1) {
+        const sorted = [...teams].sort((a, b) => b.score - a.score);
+        const topScore = sorted[0].score;
+        podiumHtml = `<div class="podium">
+          ${sorted.map((t, idx) => `
+            <div class="podium-row ${t.score === topScore && topScore > 0 ? "win" : ""}">
+              <span>${idx === 0 && topScore > 0 ? "🏆 " : ""}<i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${t.color};margin-right:6px"></i>${t.name}</span>
+              <span>${t.score} pts</span>
+            </div>`).join("")}
+        </div>`;
+      }
+
+      st.innerHTML = `<div class="intro result">
+        <div class="stars">${"⭐".repeat(stars)}${"☆".repeat(3 - stars)}</div>
+        <div class="meme-card">
+          <div class="meme-anim ${meme.cls}">${meme.emoji}</div>
+          <div class="meme-caption">${meme.title}</div>
+          <small>${meme.text}</small>
+        </div>
+        ${podiumHtml}
+        <div class="stats"><div><b>${r.hits}</b>acertos</div><div><b>${r.errors}</b>erros</div>${r.score != null && teamCount === 1 ? `<div><b>${r.score}</b>pontos</div>` : ""}</div>
         ${r.msg ? `<p>${r.msg}</p>` : ""}
         <div class="row">
           <button class="btn big" id="again">↻ Jogar de novo</button>
