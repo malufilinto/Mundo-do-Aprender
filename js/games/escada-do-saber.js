@@ -1,56 +1,104 @@
 Portal.register({
   id: "escada-do-saber", name: "Escada do Saber", category: "Matemática", grade: "2º ao 4º ano",
   icon: "🪜", color: "linear-gradient(135deg,#7c3aed,#ff7a3d)",
-  description: "Suba a escada de moedas respondendo desafios de Matemática, Português ou Conhecimentos Gerais.",
-  instructions: ["Escolha a matéria que deseja praticar.", "Responda cada pergunta escolhendo uma das 4 alternativas.", "Você tem 1 ajuda para pular e 1 para eliminar duas erradas.", "A estrela marca um ponto seguro de 1000 moedas."],
+  description: "Suba a escada de 10 perguntas escolhendo o conteúdo específico de Português, Matemática ou Geografia.",
+  instructions: ["Escolha a matéria e o tema específico.", "Responda cada pergunta escolhendo uma das 4 alternativas.", "Use as ajudas (Pular ou Eliminar duas) quando precisar.", "A estrela marca o ponto seguro de 1000 moedas."],
   topics: [
     {
-      icon: "🔢", title: "Matemática (2º ao 4º ano)", desc: "Operações, medidas, horas e geometria",
+      subject: "Língua Portuguesa", icon: "✍️", title: "Ortografia: S, Z, SS ou Ç", desc: "Quando usar cada letra corretamente",
       questions: [
-        ["Quanto é 15 + 14?", ["29", "28", "30", "25"]],
-        ["Quantos minutos tem 1 hora?", ["60 minutos", "30 minutos", "100 minutos", "45 minutos"]],
-        ["Qual é o dobro de 12?", ["24", "14", "22", "36"]],
-        ["Quantos lados tem um triângulo?", ["3 lados", "4 lados", "5 lados", "6 lados"]],
-        ["Quanto é 6 × 4?", ["24", "20", "28", "18"]],
-        ["Se uma pizza tem 8 fatias e comemos 3, quantas sobram?", ["5 fatias", "4 fatias", "6 fatias", "3 fatias"]],
-        ["Quantos centímetros tem 1 metro?", ["100 cm", "10 cm", "50 cm", "1000 cm"]],
-        ["Qual número representa uma centena e meia?", ["150", "105", "510", "1500"]],
+        ["Qual palavra está escrita corretamente com Ç?", ["Coração", "Corassão", "Corazão", "Corasão"]],
+        ["Qual palavra se escreve com Z no final?", ["Feliz", "Felis", "Feliç", "Feliss"]],
+        ["Entre duas vogais, para ter som forte de S, usamos:", ["SS (como em pássaro)", "Z (como em pazaro)", "Ç (como em paçaro)", "X (como em paxaro)"]],
+        ["Qual palavra está escrita de forma correta?", ["Cebola", "Çebola", "Sebola", "Zebola"]],
+        ["No início das palavras, NUNCA usamos:", ["Ç ou SS", "S ou C", "Z ou S", "C ou Z"]],
+        ["Como se escreve o nome da flor amarela que gira para o Sol?", ["Girassol", "Girasol", "Giraçol", "Girazol"]],
+        ["Qual palavra está escrita corretamente com Z?", ["Azeitona", "Aseitona", "Açeitona", "Asseitona"]],
+        ["Qual palavra completa a frase: 'Comi uma deliciosa ______ de morango'?", ["Taça", "Tassa", "Taza", "Tasa"]],
+        ["Qual palavra tem o som de Z, mas é escrita com S?", ["Casa", "Caza", "Caça", "Cassa"]],
+        ["Qual palavra está escrita corretamente?", ["Açúcar", "Assúcar", "Asúcar", "Azúcar"]]
+      ],
+      reserve: [["Qual palavra se escreve com SS?", ["Vassoura", "Vasoura", "Vaçoura", "Vazoura"]]]
+    },
+    {
+      subject: "Língua Portuguesa", icon: "📚", title: "Gramática: Substantivos, Adjetivos e Verbos", desc: "Classes de palavras e concordância",
+      questions: [
+        ["Qual palavra é um substantivo próprio?", ["São Paulo", "cidade", "menino", "caderno"]],
+        ["Na frase 'A menina estudiosa leu o livro', qual palavra é um adjetivo?", ["estudiosa", "menina", "leu", "livro"]],
+        ["Qual palavra indica uma ação (verbo)?", ["Correr", "Bonito", "Escola", "Mesa"]],
+        ["Qual é o plural correto de 'cidadão'?", ["Cidadãos", "Cidadões", "Cidadães", "Cidadãozes"]],
+        ["Qual palavra é um substantivo coletivo de peixes?", ["Cardume", "Alcateia", "Enxame", "Rebanho"]],
+        ["Na frase 'Os cachorros latiram alto', o verbo 'latiram' está no:", ["Passado", "Presente", "Futuro", "Infinitivo"]],
+        ["Qual é o antônimo (contrário) de 'generoso'?", ["Egoísta", "Bondoso", "Carinhoso", "Gentil"]],
+        ["Qual palavra é um substantivo derivado de 'pedra'?", ["Pedreiro", "Paredão", "Tijolo", "Areia"]],
+        ["Em 'O dia está ensolarado', a palavra 'ensolarado' dá qualidade ao:", ["Dia", "Está", "O", "Sol"]],
+        ["Qual conjunto tem apenas verbos?", ["Pular, cantar, dormir", "Casa, bola, gato", "Azul, feliz, alto", "Eu, tu, ele"]]
+      ],
+      reserve: [["Qual é o feminino de 'bode'?", ["Cabra", "Ovelha", "Égua", "Vaca"]]]
+    },
+    {
+      subject: "Matemática", icon: "✖️", title: "Tabuada e Multiplicação (2 ao 9)", desc: "Cálculo mental e situações-problema",
+      questions: [
+        ["Quanto é 3 × 4?", ["12", "7", "14", "16"]],
+        ["Quanto é 5 × 6?", ["30", "25", "35", "20"]],
+        ["Se 1 caixa tem 4 lápis, quantos lápis há em 7 caixas?", ["28 lápis", "24 lápis", "32 lápis", "21 lápis"]],
+        ["Quanto é 6 × 6?", ["36", "30", "42", "32"]],
+        ["Quanto é o triplo de 9?", ["27", "18", "36", "24"]],
         ["Quanto é 7 × 8?", ["56", "54", "49", "63"]],
-        ["Dividindo 36 balas igualmente entre 4 crianças, cada uma ganha:", ["9 balas", "8 balas", "6 balas", "12 balas"]]
+        ["Em 8 pacotes com 5 figurinhas cada, temos:", ["40 figurinhas", "35 figurinhas", "45 figurinhas", "30 figurinhas"]],
+        ["Quanto é 9 × 4?", ["36", "32", "40", "27"]],
+        ["Qual multiplicação tem como resultado o número 48?", ["6 × 8", "7 × 6", "9 × 5", "8 × 5"]],
+        ["Quanto é 9 × 9?", ["81", "72", "90", "79"]]
       ],
-      reserve: [["Quanto é 100 - 35?", ["65", "75", "55", "60"]]]
+      reserve: [["Quanto é 4 × 8?", ["32", "28", "36", "24"]]]
     },
     {
-      icon: "📖", title: "Língua Portuguesa", desc: "Sílabas, classes de palavras e ortografia",
+      subject: "Matemática", icon: "💰", title: "Sistema Monetário e Medidas", desc: "Reais, centavos, horas, metros e litros",
       questions: [
-        ["Qual palavra é um substantivo próprio?", ["Brasil", "cidade", "cachorro", "menina"]],
-        ["Quantas sílabas tem a palavra BOR-BO-LE-TA?", ["4 sílabas", "3 sílabas", "5 sílabas", "2 sílabas"]],
-        ["Qual é o antônimo (contrário) de ALEGRE?", ["Triste", "Feliz", "Contente", "Rápido"]],
-        ["Qual palavra está escrita corretamente?", ["Passarinho", "Pasarinho", "Passarrinho", "Paçarinho"]],
-        ["Na frase 'O gato dormiu no sofá', qual palavra indica uma ação (verbo)?", ["dormiu", "gato", "sofá", "no"]],
-        ["Qual é o plural correto de PÃO?", ["Pães", "Pãos", "Pãoses", "Pãezinhos"]],
-        ["Qual palavra é um adjetivo (qualidade)?", ["Carinhoso", "Caderno", "Correr", "Janela"]],
-        ["Antes de P e B usamos sempre a letra:", ["M", "N", "R", "S"]],
-        ["Qual palavra é proparoxítona (sílaba forte na antepenúltima)?", ["Médico", "Café", "Caderno", "Abacaxi"]],
-        ["Qual sinal de pontuação usamos ao final de uma pergunta?", ["Ponto de interrogação (?)", "Ponto final (.)", "Vírgula (,)", "Dois-pontos (:)"]]
+        ["Quantas moedas de 50 centavos formam 1 real?", ["2 moedas", "4 moedas", "5 moedas", "10 moedas"]],
+        ["Quantos minutos tem meia hora?", ["30 minutos", "15 minutos", "60 minutos", "45 minutos"]],
+        ["Se um caderno custa R$ 12,00 e pago com R$ 20,00, quanto recebo de troco?", ["R$ 8,00", "R$ 6,00", "R$ 10,00", "R$ 7,00"]],
+        ["Qual unidade usamos para medir o leite da garrafa?", ["Litro (L)", "Quilograma (kg)", "Metro (m)", "Grau (°C)"]],
+        ["Quantos centímetros há em 2 metros?", ["200 cm", "20 cm", "100 cm", "2000 cm"]],
+        ["Uma aula começa às 13h00 e termina às 14h30. Quanto tempo ela durou?", ["1 hora e 30 minutos", "2 horas", "1 hora", "45 minutos"]],
+        ["Quantos gramas tem meio quilo (0,5 kg)?", ["500 g", "100 g", "250 g", "1000 g"]],
+        ["Juntando 1 nota de R$ 10, 1 nota de R$ 5 e 3 moedas de R$ 1, temos:", ["R$ 18,00", "R$ 15,00", "R$ 17,00", "R$ 19,00"]],
+        ["Quantos dias tem um ano comum (não bissexto)?", ["365 dias", "360 dias", "366 dias", "356 dias"]],
+        ["Um filme tem 120 minutos. Isso corresponde a:", ["2 horas", "1 hora e meia", "3 horas", "1 hora"]]
       ],
-      reserve: [["Qual é o feminino de CAVALO?", ["Égua", "Cavala", "Vaca", "Ovelha"]]]
+      reserve: [["Quantas moedas de 25 centavos formam 1 real?", ["4 moedas", "2 moedas", "5 moedas", "10 moedas"]]]
     },
     {
-      icon: "🌎", title: "Conhecimentos Gerais", desc: "Brasil, cultura e curiosidades",
+      subject: "Geografia", icon: "🐆", title: "Biomas Brasileiros", desc: "Amazônia, Cerrado, Caatinga, Mata Atlântica, Pantanal e Pampa",
       questions: [
-        ["Quantos dias tem uma semana?", ["7 dias", "5 dias", "6 dias", "8 dias"]],
-        ["Qual é a capital do Brasil?", ["Brasília", "Rio de Janeiro", "São Paulo", "Salvador"]],
-        ["Quem criou a Turma da Mônica?", ["Mauricio de Sousa", "Monteiro Lobato", "Ziraldo", "Ruth Rocha"]],
-        ["Quantos meses tem um ano?", ["12 meses", "10 meses", "11 meses", "13 meses"]],
-        ["Qual é o maior oceano da Terra?", ["Oceano Pacífico", "Oceano Atlântico", "Oceano Índico", "Oceano Ártico"]],
-        ["Em qual continente fica o Brasil?", ["América do Sul", "Europa", "África", "Ásia"]],
-        ["Qual instrumento usamos para verificar os pontos cardeais?", ["Bússola", "Termômetro", "Balança", "Régua"]],
-        ["Quais são as cores da bandeira do Brasil?", ["Verde, amarelo, azul e branco", "Verde, vermelho e branco", "Azul, branco e vermelho", "Amarelo, preto e branco"]],
-        ["Qual é o maior mamífero do mundo?", ["Baleia-azul", "Elefante", "Girafa", "Hipopótamo"]],
-        ["Quem pintou o quadro famoso 'Mona Lisa'?", ["Leonardo da Vinci", "Tarsila do Amaral", "Pablo Picasso", "Vincent van Gogh"]]
+        ["Qual é o maior bioma do Brasil, famoso pela floresta equatorial e grandes rios?", ["Amazônia", "Pampa", "Caatinga", "Pantanal"]],
+        ["Qual bioma é exclusivo do Brasil e possui clima semiárido com cactos como o mandacaru?", ["Caatinga", "Mata Atlântica", "Pampa", "Amazônia"]],
+        ["Qual bioma ocupa a região central do Brasil e tem árvores de troncos retorcidos?", ["Cerrado", "Pampa", "Pantanal", "Mata Atlântica"]],
+        ["Qual bioma é conhecido por ser a maior planície alagável do planeta?", ["Pantanal", "Caatinga", "Pampa", "Cerrado"]],
+        ["Qual bioma fica no extremo sul do Brasil (Rio Grande do Sul) com campos limpos?", ["Pampa", "Amazônia", "Caatinga", "Pantanal"]],
+        ["Qual floresta acompanha grande parte do litoral brasileiro e abriga o mico-leão-dourado?", ["Mata Atlântica", "Cerrado", "Pampa", "Caatinga"]],
+        ["O tuiuiú é uma ave símbolo de qual bioma brasileiro?", ["Pantanal", "Pampa", "Caatinga", "Mata Atlântica"]],
+        ["O lobo-guará e o pequi são muito característicos de qual bioma?", ["Cerrado", "Amazônia", "Pampa", "Mata Atlântica"]],
+        ["O boto-cor-de-rosa e a vitória-régia vivem nos rios de qual bioma?", ["Amazônia", "Caatinga", "Pampa", "Cerrado"]],
+        ["Por que preservar os biomas brasileiros é importante?", ["Para proteger os animais, as plantas, os rios e o clima", "Apenas para construir estradas", "Porque não existem animais neles", "Para acabar com as chuvas"]]
       ],
-      reserve: [["Qual cor obtemos misturando azul e amarelo?", ["Verde", "Roxo", "Laranja", "Rosa"]]]
+      reserve: [["Quantos biomas continentais principais existem no Brasil?", ["6 biomas", "3 biomas", "10 biomas", "2 biomas"]]]
+    },
+    {
+      subject: "Geografia", icon: "🧭", title: "Brasil: Regiões, Estados e Orientação", desc: "Mapa do Brasil e pontos cardeais",
+      questions: [
+        ["Em quantas grandes regiões o Brasil é dividido pelo IBGE?", ["5 regiões", "4 regiões", "6 regiões", "7 regiões"]],
+        ["Qual é a capital do Brasil?", ["Brasília", "São Paulo", "Rio de Janeiro", "Belo Horizonte"]],
+        ["Em qual região do Brasil fica o estado de São Paulo?", ["Região Sudeste", "Região Sul", "Região Nordeste", "Região Norte"]],
+        ["Qual ponto cardeal indica a direção onde o Sol nasce (nascente)?", ["Leste", "Oeste", "Norte", "Sul"]],
+        ["Qual região brasileira possui o maior número de estados (9 estados)?", ["Região Nordeste", "Região Sul", "Região Centro-Oeste", "Região Sudeste"]],
+        ["Qual é o menor estado brasileiro em extensão territorial?", ["Sergipe", "Amazonas", "Bahia", "Minas Gerais"]],
+        ["Qual é o maior estado brasileiro em extensão territorial?", ["Amazonas", "São Paulo", "Rio de Janeiro", "Paraná"]],
+        ["Paraná, Santa Catarina e Rio Grande do Sul formam qual região?", ["Região Sul", "Região Norte", "Região Sudeste", "Região Centro-Oeste"]],
+        ["Se você abrir o braço direito para onde o Sol nasce (Leste), à sua frente estará o:", ["Norte", "Sul", "Oeste", "Sudeste"]],
+        ["Qual oceano banha o litoral do Brasil?", ["Oceano Atlântico", "Oceano Pacífico", "Oceano Índico", "Oceano Ártico"]]
+      ],
+      reserve: [["Qual é o ponto cardeal oposto ao Norte?", ["Sul", "Leste", "Oeste", "Nordeste"]]]
     }
   ],
   mount(root, api) {
