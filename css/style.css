@@ -130,3 +130,15 @@ footer{text-align:center;padding:18px;font-size:.9rem;background:#fff;border-top
 .tbtn:hover{border-color:var(--p);background:#eef;transform:translateY(-2px)}
 .tbtn strong{font-size:1.05rem;color:var(--p)}
 .tbtn small{color:#5b5890;font-weight:700}
+/* Seletor de matérias e recortes específicos */
+.subject-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:14px 0}
+.stab{font:inherit;font-weight:700;font-size:.9rem;padding:7px 14px;border-radius:99px;border:2px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+.stab.on{background:var(--p);border-color:var(--p);color:#fff}
+.tsearch{font:inherit;width:100%;max-width:420px;padding:10px 14px;border:2px solid var(--line);border-radius:12px;margin:4px auto 12px;display:block}
+.topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0;text-align:left}
+.tbtn{font:inherit;background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;color:var(--ink);display:flex;flex-direction:column;gap:5px;transition:transform .12s,border-color .12s}
+.tbtn:hover{border-color:var(--p);background:#eef;transform:translateY(-2px)}
+.tbtn .ttop{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.tbtn .tsub{font-size:.75rem;font-weight:700;background:var(--bg);color:var(--p);padding:2px 9px;border-radius:99px}
+.tbtn strong{font-size:1.02rem;color:var(--ink)}
+.tbtn small{color:#5b5890;font-size:.86rem}
