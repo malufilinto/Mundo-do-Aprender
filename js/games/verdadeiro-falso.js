@@ -1,40 +1,62 @@
 Portal.register({
   id: "verdadeiro-ou-falso", name: "Verdadeiro ou Falso", category: "Ciências", grade: "2º ao 4º ano",
   icon: "✅", color: "linear-gradient(135deg,#22b573,#ef476f)",
-  description: "Escolha um tema de Ciências e descubra se as afirmações são verdadeiras ou falsas com explicações educativas.",
-  instructions: ["Escolha o assunto de Ciências.", "Leia a afirmação na tela e toque em Verdadeiro ou Falso.", "Leia a explicação e avance. Cada acerto vale 10 pontos."],
+  description: "Analise afirmações específicas de Ciências, Geografia, Português ou Matemática com explicação imediata.",
+  instructions: ["Escolha a matéria e o recorte do conteúdo.", "Leia a afirmação e decida se é Verdadeira ou Falsa.", "Leia a explicação e avance (10 pontos por acerto)."],
   topics: [
     {
-      icon: "🦋", title: "Seres Vivos e Plantas", desc: "Animais vertebrados, invertebrados e botânica",
+      subject: "Ciências", icon: "🦋", title: "Animais Vertebrados e Invertebrados", desc: "Classificação, habitat e respiração",
       questions: [
         ["Os peixes respiram debaixo d'água usando brânquias.", 1, "As brânquias retiram o oxigênio dissolvido na água."],
         ["Os morcegos são aves porque sabem voar.", 0, "Morcegos são mamíferos: têm pelos e mamam quando filhotes."],
-        ["As plantas produzem seu próprio alimento por meio da fotossíntese.", 1, "Elas usam luz do Sol, água e gás carbônico."],
-        ["As aranhas e as formigas são animais vertebrados.", 0, "Elas são invertebradas, pois não possuem coluna vertebral."],
-        ["As raízes ajudam a fixar a planta no solo e absorver água.", 1, "Além de prender a planta, absorvem água e sais minerais."],
-        ["Sapos e rãs são anfíbios que vivem na água e na terra.", 1, "Quando filhotes (girinos), vivem na água; adultos, também na terra."]
+        ["As aranhas e as formigas são animais invertebrados.", 1, "Elas não possuem crânio nem coluna vertebral."],
+        ["Sapos e rãs são anfíbios que vivem na água quando filhotes.", 1, "Os girinos vivem na água e depois passam por metamorfose."],
+        ["As cobras são animais invertebrados porque não têm patas.", 0, "As cobras são répteis vertebrados: possuem coluna vertebral."],
+        ["As aves têm o corpo coberto de penas e nascem de ovos.", 1, "São animais vertebrados ovíparos."]
       ]
     },
     {
-      icon: "🌍", title: "Terra, Universo e Água", desc: "Movimentos da Terra, Sol, Lua e estados da água",
+      subject: "Ciências", icon: "🌍", title: "Terra, Sol, Lua e Estados da Água", desc: "Astronomia básica e ciclo hidrológico",
       questions: [
         ["A Terra gira em torno do Sol, movimento chamado de translação.", 1, "Esse movimento dura cerca de 365 dias e origina o ano."],
-        ["A Lua tem luz própria igual ao Sol.", 0, "A Lua não tem luz própria; ela reflete a luz do Sol."],
-        ["O Sol é uma estrela.", 1, "O Sol é a estrela central do nosso Sistema Solar."],
-        ["A água ferve e vira vapor a 100 °C ao nível do mar.", 1, "Essa mudança do estado líquido para o gasoso chama-se vaporização."],
-        ["O movimento de rotação da Terra causa os dias e as noites.", 1, "A Terra gira em torno de si mesma em aproximadamente 24 horas."],
-        ["Toda a água dos oceanos é doce e própria para beber.", 0, "A água dos oceanos é salgada; a maior parte da água doce está nas geleiras e rios."]
+        ["A Lua tem luz própria igual ao Sol.", 0, "A Lua apenas reflete a luz do Sol."],
+        ["O Sol é uma estrela.", 1, "É a estrela central do nosso Sistema Solar."],
+        ["O movimento de rotação da Terra causa os dias e as noites.", 1, "A Terra gira em torno de si mesma em 24 horas."],
+        ["Quando o gelo derrete, a água passa do estado líquido para o sólido.", 0, "Ela passa do estado sólido (gelo) para o líquido (fusão)."],
+        ["As plantas produzem seu alimento por meio da fotossíntese.", 1, "Elas usam luz solar, água e gás carbônico."]
       ]
     },
     {
-      icon: "🫀", title: "Corpo Humano e Saúde", desc: "Órgãos, sentidos e alimentação saudável",
+      subject: "Geografia", icon: "🗺️", title: "Paisagem Natural, Cultural e Biomas", desc: "Transformação do espaço e natureza",
       questions: [
-        ["O coração bombeia o sangue para todo o corpo.", 1, "O sangue leva oxigênio e nutrientes por meio das artérias e veias."],
-        ["As costelas ajudam a proteger o coração e os pulmões.", 1, "Os ossos da caixa torácica protegem esses órgãos vitais."],
-        ["Temos 5 sentidos principais: visão, audição, olfato, paladar e tato.", 1, "Eles nos ajudam a perceber o ambiente ao nosso redor."],
-        ["Comer apenas doces e frituras todos os dias faz bem para o crescimento.", 0, "Precisamos de frutas, legumes, grãos e proteínas para crescer com saúde."],
-        ["Os dentes de leite são substituídos pelos dentes permanentes.", 1, "Isso acontece geralmente entre os 6 e 12 anos de idade."],
-        ["Beber água todos os dias ajuda o corpo a funcionar bem.", 1, "A água hidrata o corpo e regula nossa temperatura."]
+        ["Uma floresta que nunca foi derrubada é exemplo de paisagem natural.", 1, "Paisagens naturais não sofreram modificações humanas."],
+        ["Pontes, prédios e ruas asfaltadas fazem parte da paisagem cultural (modificada).", 1, "Foram construídos pelo trabalho humano."],
+        ["A Caatinga é um bioma brasileiro com muita neve durante o inverno.", 0, "A Caatinga tem clima semiárido quente e seco, no Nordeste."],
+        ["O Brasil está localizado no continente chamado América do Sul.", 1, "É o maior país da América do Sul."],
+        ["O Sol nasce sempre no ponto cardeal Oeste.", 0, "O Sol nasce no Leste (nascente) e se põe no Oeste (poente)."],
+        ["Os rios são importantes para o abastecimento de água, energia e transporte.", 1, "Por isso devemos evitar jogar lixo e esgoto nos rios."]
+      ]
+    },
+    {
+      subject: "Língua Portuguesa", icon: "📝", title: "Regras de Ortografia e Pontuação", desc: "Uso de M/N, R/RR, S/SS e sinais",
+      questions: [
+        ["Antes das letras P e B devemos usar sempre a letra M.", 1, "Exemplos: campo, tambor, limpeza, bombeiro."],
+        ["Podemos começar uma palavra usando RR, como em 'rrato'.", 0, "Nenhuma palavra em português começa com RR ou SS."],
+        ["O ponto de interrogação (?) é usado no final de perguntas.", 1, "Exemplo: 'Qual é o seu nome?'."],
+        ["A palavra 'passarinho' se escreve com apenas um S.", 0, "Entre vogais, para ter som forte, escrevemos 'passarinho' com SS."],
+        ["Substantivos próprios, como nomes de pessoas e cidades, começam com letra maiúscula.", 1, "Exemplos: Maria, Dante, Brasil, São Paulo."],
+        ["A palavra 'árvore' tem acento agudo na primeira sílaba.", 1, "É uma palavra proparoxítona (ár-vo-re)."]
+      ]
+    },
+    {
+      subject: "Matemática", icon: "🔢", title: "Números, Dobro, Metade e Geometria", desc: "Verdadeiro ou falso matemático",
+      questions: [
+        ["O dobro de 15 é 30.", 1, "Dobro significa multiplicar por 2 (15 + 15 = 30)."],
+        ["Um quadrado tem 4 lados iguais.", 1, "O quadrado possui 4 lados de mesma medida e 4 cantos retos."],
+        ["O número 245 é formado por 2 centenas, 4 dezenas e 5 unidades.", 1, "200 + 40 + 5 = 245."],
+        ["A metade de 50 é 30.", 0, "A metade de 50 é 25 (25 + 25 = 50)."],
+        ["Todo número terminado em 0, 2, 4, 6 ou 8 é um número par.", 1, "Os números terminados em 1, 3, 5, 7 ou 9 são ímpares."],
+        ["Um triângulo possui 5 lados.", 0, "O triângulo possui 3 lados e 3 vértices."]
       ]
     }
   ],
