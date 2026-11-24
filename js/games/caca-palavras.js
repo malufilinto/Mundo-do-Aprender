@@ -1,21 +1,21 @@
 Portal.register({
   id: "caca-palavras", name: "Caça-Palavras", category: "Língua Portuguesa", grade: "2º ao 4º ano",
   icon: "🔍", color: "linear-gradient(135deg,#4f46e5,#2ab7ca)",
-  description: "Encontre palavras escondidas organizadas por recortes de Ortografia, Geografia, Ciências e Matemática.",
+  description: "Encontre as 8 palavras sorteadas na grade entre bancos de 16 palavras por tema, ou crie sua própria lista.",
   instructions: ["Escolha a matéria e o recorte específico da aula.", "Toque na primeira letra da palavra e depois na última (horizontal, vertical ou diagonal).", "Professor: use o campo abaixo da grade para criar um caça-palavras personalizado."],
   topics: [
-    { subject: "Língua Portuguesa", icon: "✏️", title: "Ortografia: S, Z, SS ou Ç", desc: "Sons do S e regularidades ortográficas", words: ["PASSARO", "GIRASSOL", "CRIANCAS", "CORACAO", "AZEITONA", "COZINHA", "ACUCAR", "TESOURO"] },
-    { subject: "Língua Portuguesa", icon: "🔤", title: "Ortografia: M antes de P e B", desc: "Regra nasal antes de consoantes", words: ["TAMBOR", "BOMBEIRO", "CAMPO", "LIMPEZA", "SOMBRA", "TEMPO", "POMBA", "EMPADA"] },
-    { subject: "Língua Portuguesa", icon: "📖", title: "Dígrafos: CH, LH e NH", desc: "Encontros de duas letras com um som", words: ["CHOCOLATE", "COELHO", "GALINHA", "CHAVEIRO", "FOLHA", "JOANINHA", "MOCHILA", "ABELHA"] },
-    { subject: "Geografia", icon: "🌳", title: "Biomas Brasileiros", desc: "Paisagens naturais e vegetação do Brasil", words: ["AMAZONIA", "CERRADO", "CAATINGA", "PANTANAL", "PAMPA", "FLORESTA", "CERRADAO", "MANGUE"] },
-    { subject: "Geografia", icon: "🗺️", title: "Paisagem Urbana e Rural", desc: "Elementos do campo e da cidade", words: ["AVENIDA", "LAVOURA", "SEMAFORO", "FAZENDA", "INDUSTRIA", "COLHEITA", "VIADUTO", "ESTRADAS"] },
-    { subject: "Ciências", icon: "💧", title: "Estados e Ciclo da Água", desc: "Transformações da água na natureza", words: ["VAPOR", "NUVEM", "CHUVA", "GELEIRA", "LIQUIDO", "SOLIDO", "OCEANO", "NASCENTE"] },
-    { subject: "Matemática", icon: "📐", title: "Figuras Geométricas", desc: "Formas planas e sólidos geométricos", words: ["TRIANGULO", "QUADRADO", "CIRCULO", "CUBO", "ESFERA", "CILINDRO", "PIRAMIDE", "CONE"] }
+    { subject: "Língua Portuguesa", icon: "✏️", title: "Ortografia: S, Z, SS ou Ç", desc: "Banco com 16 palavras de S, Z, SS e Ç", words: ["PASSARO", "GIRASSOL", "CRIANCAS", "CORACAO", "AZEITONA", "COZINHA", "ACUCAR", "TESOURO", "VASSOURA", "PALHACO", "BUZINA", "PESSEGO", "ALMOCO", "BALANCA", "RAPOSA", "CEREJA"] },
+    { subject: "Língua Portuguesa", icon: "🔤", title: "Ortografia: M antes de P e B", desc: "Banco com 16 palavras com MP e MB", words: ["TAMBOR", "BOMBEIRO", "CAMPO", "LIMPEZA", "SOMBRA", "TEMPO", "POMBA", "EMPADA", "LAMPADA", "UMBIGO", "COMPRAS", "CAMPEAO", "CARIMBO", "BERIMBAU", "SIMPATIA", "AMBULANCIA"] },
+    { subject: "Língua Portuguesa", icon: "📖", title: "Dígrafos: CH, LH e NH", desc: "Banco com 16 palavras com CH, LH e NH", words: ["CHOCOLATE", "COELHO", "GALINHA", "CHAVEIRO", "FOLHA", "JOANINHA", "MOCHILA", "ABELHA", "GOLFINHO", "ESPELHO", "MINHOCA", "CACHORRO", "OVELHA", "CHUVEIRO", "MILHO", "NINHO"] },
+    { subject: "Geografia", icon: "🌳", title: "Biomas Brasileiros", desc: "Banco com 16 termos da natureza do Brasil", words: ["AMAZONIA", "CERRADO", "CAATINGA", "PANTANAL", "PAMPA", "FLORESTA", "CERRADAO", "MANGUE", "TUIUIU", "ARARA", "MANDACARU", "PEQUI", "JAGUAR", "ARAUCARIA", "LITORAL", "NASCENTE"] },
+    { subject: "Geografia", icon: "🗺️", title: "Paisagem Urbana e Rural", desc: "Banco com 16 termos de campo e cidade", words: ["AVENIDA", "LAVOURA", "SEMAFORO", "FAZENDA", "INDUSTRIA", "COLHEITA", "VIADUTO", "ESTRADAS", "PLANTACAO", "COMERCIO", "PREFEITURA", "PASTO", "TRATOR", "HOSPITAL", "CHACARA", "PRACA"] },
+    { subject: "Ciências", icon: "💧", title: "Estados e Ciclo da Água", desc: "Banco com 16 termos sobre água e clima", words: ["VAPOR", "NUVEM", "CHUVA", "GELEIRA", "LIQUIDO", "SOLIDO", "OCEANO", "NASCENTE", "GRANIZO", "ORVALHO", "GASOSO", "FUSAO", "FILTRAR", "NEBLINA", "RIACHO", "POTAVEL"] },
+    { subject: "Matemática", icon: "📐", title: "Figuras Geométricas", desc: "Banco com 16 formas planas e sólidos", words: ["TRIANGULO", "QUADRADO", "CIRCULO", "CUBO", "ESFERA", "CILINDRO", "PIRAMIDE", "CONE", "RETANGULO", "LOSANGO", "TRAPEZIO", "HEXAGONO", "VERTICE", "ARESTA", "PRISMA", "PENTAGONO"] }
   ],
   mount(root, api) {
     const N = 10, DIRS = [[0, 1], [1, 0], [1, 1]], COLS = ["#ffd23f", "#9be7a6", "#ffb3c1", "#a5d8ff", "#d0bfff", "#ffc78f", "#b2f2bb", "#fcc2d7"];
     const baseWords = api.topic ? api.topic.words : Portal.games.find(g => g.id === "caca-palavras").topics[0].words;
-    let words = baseWords.slice(), grid, found, start, errs;
+    let words = Portal.shuffle(baseWords).slice(0, 8), grid, found, start, errs;
     function build() {
       grid = Array.from({ length: N }, () => Array(N).fill(""));
       const placed = [];
