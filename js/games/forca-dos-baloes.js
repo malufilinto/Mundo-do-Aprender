@@ -1,63 +1,118 @@
 Portal.register({
   id: "forca-dos-baloes", name: "Forca dos Balões", category: "Língua Portuguesa", grade: "2º ao 4º ano",
   icon: "🎈", color: "linear-gradient(135deg,#2ab7ca,#ef476f)",
-  description: "Descubra palavras-chave de Ortografia, Geografia, Ciências e História antes que os balões estourem!",
-  instructions: ["Escolha a matéria e o recorte desejado.", "Leia a dica e toque nas letras para formar a palavra.", "Cada letra errada estoura um balão (5 balões por palavra)."],
+  description: "Descubra a palavra secreta usando apenas a dica da categoria antes que os 5 balões estourem!",
+  instructions: ["Escolha a matéria e o recorte desejado.", "Leia a categoria e toque nas letras para descobrir a palavra.", "Cada letra errada estoura um balão (5 balões por palavra)."],
   topics: [
     {
-      subject: "Língua Portuguesa", icon: "✏️", title: "Ortografia: S, Z, SS ou Ç", desc: "Treino de grafia com dicas ortográficas",
+      subject: "Língua Portuguesa", icon: "✏️", title: "Ortografia: S, Z, SS ou Ç", desc: "16 palavras com S, Z, SS e Ç",
       words: [
-        ["PASSARO", "Animal com penas e bico (escrito com SS)", "🐦"],
-        ["CORACAO", "Órgão que bombeia o sangue (escrito com Ç)", "❤️"],
-        ["AZEITONA", "Fruto pequeno usado na pizza (escrito com Z)", "🫒"],
-        ["GIRASSOL", "Flor amarela que segue a luz do Sol (com SS)", "🌻"],
-        ["ACUCAR", "Ingrediente doce usado nos bolos (com Ç)", "🍰"]
+        ["PASSARO", "Animal", "🐦"],
+        ["CORACAO", "Órgão do corpo", "❤️"],
+        ["AZEITONA", "Comida / Fruto", "🫒"],
+        ["GIRASSOL", "Flor", "🌻"],
+        ["ACUCAR", "Ingrediente", "🍰"],
+        ["VASSOURA", "Objeto de limpeza", "🧹"],
+        ["PALHACO", "Artista de circo", "🤡"],
+        ["BUZINA", "Som de veículo", "📢"],
+        ["PESSEGO", "Fruta", "🍑"],
+        ["COZINHA", "Cômodo da casa", "🍳"],
+        ["CRIANCA", "Pessoa", "🧒"],
+        ["TESOURO", "Riqueza escondida", "💎"],
+        ["ALMOCO", "Refeição", "🍽️"],
+        ["OSSO", "Parte do esqueleto", "🦴"],
+        ["BALANCA", "Instrumento de medida", "⚖️"],
+        ["RAPOSA", "Animal silvestre", "🦊"]
       ]
     },
     {
-      subject: "Língua Portuguesa", icon: "🔤", title: "Dígrafos: CH, LH e NH", desc: "Palavras com encontros consonantais",
+      subject: "Língua Portuguesa", icon: "🔤", title: "Dígrafos: CH, LH e NH", desc: "16 palavras com CH, LH e NH",
       words: [
-        ["CHOCOLATE", "Doce feito com cacau (escrito com CH)", "🍫"],
-        ["ABELHA", "Inseto que produz mel (escrito com LH)", "🐝"],
-        ["JOANINHA", "Inseto vermelho de pintinhas pretas (com NH)", "🐞"],
-        ["MOCHILA", "Usada para carregar cadernos e livros (com CH)", "🎒"],
-        ["ESPELHO", "Objeto onde vemos nosso reflexo (com LH)", "🪞"]
+        ["CHOCOLATE", "Doce", "🍫"],
+        ["ABELHA", "Inseto", "🐝"],
+        ["JOANINHA", "Inseto", "🐞"],
+        ["MOCHILA", "Material escolar", "🎒"],
+        ["ESPELHO", "Objeto", "🪞"],
+        ["COELHO", "Animal", "🐰"],
+        ["GALINHA", "Ave", "🐔"],
+        ["CHAVEIRO", "Objeto", "🔑"],
+        ["GOLFINHO", "Animal marinho", "🐬"],
+        ["CHUVEIRO", "Objeto do banheiro", "🚿"],
+        ["MILHO", "Alimento", "🌽"],
+        ["MINHOCA", "Animal do solo", "🪱"],
+        ["CACHORRO", "Animal doméstico", "🐶"],
+        ["OVELHA", "Animal da fazenda", "🐑"],
+        ["SANDUICHE", "Lanche", "🥪"],
+        ["NINHO", "Casa de passarinho", "🪺"]
       ]
     },
     {
-      subject: "Geografia", icon: "🌎", title: "Biomas e Paisagens do Brasil", desc: "Vegetação e regiões naturais",
+      subject: "Geografia", icon: "🌎", title: "Biomas e Paisagens do Brasil", desc: "16 palavras sobre natureza e geografia",
       words: [
-        ["AMAZONIA", "Maior floresta tropical do Brasil e do mundo", "🌳"],
-        ["CAATINGA", "Bioma exclusivo do Brasil com clima semiárido e cactos", "🌵"],
-        ["PANTANAL", "Maior planície alagável do mundo, rica em aves e jacarés", "🐊"],
-        ["CERRADO", "Bioma do centro do Brasil com árvores de troncos retorcidos", "🌾"],
-        ["OCEANO", "Grande extensão de água salgada que banha o litoral", "🌊"]
+        ["AMAZONIA", "Bioma brasileiro", "🌳"],
+        ["CAATINGA", "Bioma brasileiro", "🌵"],
+        ["PANTANAL", "Bioma brasileiro", "🐊"],
+        ["CERRADO", "Bioma brasileiro", "🌾"],
+        ["PAMPA", "Bioma brasileiro", "🐎"],
+        ["OCEANO", "Água salgada", "🌊"],
+        ["MONTANHA", "Relevo", "⛰️"],
+        ["FLORESTA", "Vegetação", "🌲"],
+        ["PLANICIE", "Tipo de relevo", "🏞️"],
+        ["CASCATA", "Queda d'água", "💦"],
+        ["DESERTO", "Paisagem seca", "🏜️"],
+        ["ILHA", "Terra cercada de água", "🏝️"],
+        ["VULCAO", "Formação geológica", "🌋"],
+        ["LITORAL", "Região próxima ao mar", "🏖️"],
+        ["NASCENTE", "Início de um rio", "💧"],
+        ["CERRADAO", "Vegetação", "🌿"]
       ]
     },
     {
-      subject: "Ciências", icon: "🪐", title: "Sistema Solar e Universo", desc: "Astros, planetas e movimentos da Terra",
+      subject: "Ciências", icon: "🪐", title: "Sistema Solar e Natureza", desc: "16 palavras de Ciências da Natureza",
       words: [
-        ["ESTRELA", "Astro que possui luz própria, como o Sol", "⭐"],
-        ["PLANETA", "Astro sem luz própria que gira ao redor de uma estrela", "🪐"],
-        ["ROTACAO", "Movimento que a Terra faz em torno de si mesma", "🌍"],
-        ["SATELITE", "A Lua é o único natural da Terra", "🌙"],
-        ["GRAVIDADE", "Força que nos mantém com os pés no chão", "🍎"]
+        ["ESTRELA", "Astro do céu", "⭐"],
+        ["PLANETA", "Astro do Sistema Solar", "🪐"],
+        ["ROTACAO", "Movimento da Terra", "🌍"],
+        ["SATELITE", "Astro que gira ao redor de um planeta", "🌙"],
+        ["GRAVIDADE", "Força da natureza", "🍎"],
+        ["GALAXIA", "Conjunto de estrelas", "🌌"],
+        ["METEORO", "Fenômeno espacial", "☄️"],
+        ["ECLIPSE", "Fenômeno astronômico", "🌑"],
+        ["OXIGENIO", "Gás do ar", "💨"],
+        ["SEMENTE", "Parte da planta", "🌱"],
+        ["CLOROFILA", "Pigmento das folhas", "🍃"],
+        ["MAMIFERO", "Grupo de animais", "🐋"],
+        ["ANFIBIO", "Grupo de animais", "🐸"],
+        ["REPTIL", "Grupo de animais", "🐢"],
+        ["ENERGIA", "Força / Recurso", "⚡"],
+        ["VAPOR", "Estado da água", "☁️"]
       ]
     },
     {
-      subject: "História", icon: "🏛️", title: "Cidadania e Patrimônio Cultural", desc: "Memória, cultura e convivência",
+      subject: "História", icon: "🏛️", title: "Cidadania e Patrimônio Cultural", desc: "16 palavras de História e sociedade",
       words: [
-        ["MUSEU", "Lugar que guarda objetos e memórias da história", "🏛️"],
-        ["FOLCLORE", "Conjunto de lendas, festas e danças populares", "🎭"],
-        ["INDIGENA", "Povos originários que já viviam no Brasil antes de 1500", "🪶"],
-        ["DIREITOS", "Tudo aquilo que garante respeito e dignidade ao cidadão", "📜"],
-        ["MUNICIPIO", "Divisão administrativa formada pela zona urbana e rural", "🏙️"]
+        ["MUSEU", "Lugar de memória", "🏛️"],
+        ["FOLCLORE", "Cultura popular", "🎭"],
+        ["INDIGENA", "Povos originários", "🪶"],
+        ["DIREITOS", "Cidadania", "📜"],
+        ["MUNICIPIO", "Divisão territorial", "🏙️"],
+        ["HISTORIA", "Disciplina escolar", "📖"],
+        ["CULTURA", "Costumes e tradições", "🎨"],
+        ["MONUMENTO", "Patrimônio histórico", "🗿"],
+        ["REPUBLICA", "Forma de governo", "🇧🇷"],
+        ["IMIGRANTE", "Pessoa que muda de país", "🧳"],
+        ["ARTESANATO", "Trabalho manual", "🏺"],
+        ["MEMORIA", "Lembrança", "🧠"],
+        ["HERANCA", "Legado cultural", "🎁"],
+        ["COMUNIDADE", "Grupo social", "🤝"],
+        ["FERIADO", "Data comemorativa", "📅"],
+        ["DOCUMENTO", "Registro oficial", "🪪"]
       ]
     }
   ],
   mount(root, api) {
     const topic = api.topic || Portal.games.find(g => g.id === "forca-dos-baloes").topics[0];
-    const W = topic.words;
+    const W = Portal.shuffle(topic.words).slice(0, 8);
     const COL = ["#ef476f", "#ffd23f", "#2ab7ca", "#22b573", "#7c3aed"];
     let n = 0, hits = 0, errs = 0;
     function round() {
