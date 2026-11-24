@@ -124,3 +124,9 @@ footer{text-align:center;padding:18px;font-size:.9rem;background:#fff;border-top
   .logo{font-size:1.1rem}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* Seletor de temas antes do jogo */
+.topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:18px 0;text-align:left}
+.tbtn{font:inherit;background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px;cursor:pointer;color:var(--ink);display:flex;flex-direction:column;gap:4px;transition:transform .12s,border-color .12s}
+.tbtn:hover{border-color:var(--p);background:#eef;transform:translateY(-2px)}
+.tbtn strong{font-size:1.05rem;color:var(--p)}
+.tbtn small{color:#5b5890;font-weight:700}
