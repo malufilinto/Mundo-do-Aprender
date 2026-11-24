@@ -1,12 +1,17 @@
 Portal.register({
-  id: "caca-palavras", name: "Caça-Palavras", category: "Língua Portuguesa", grade: "2º ao 5º ano",
+  id: "caca-palavras", name: "Caça-Palavras", category: "Língua Portuguesa", grade: "2º ao 4º ano",
   icon: "🔍", color: "linear-gradient(135deg,#4f46e5,#2ab7ca)",
-  description: "Encontre as palavras escondidas na grade. Professores podem digitar a própria lista de palavras!",
-  instructions: ["Toque na primeira letra da palavra e depois na última.", "As palavras estão na horizontal, na vertical ou na diagonal.", "Encontre todas as palavras da lista.", "Professor: use o campo abaixo da grade para jogar com suas próprias palavras."],
+  description: "Encontre as palavras escondidas na grade escolhendo um tema pedagógico ou criando sua própria lista.",
+  instructions: ["Escolha o tema desejado antes de começar.", "Toque na primeira letra da palavra e depois na última (horizontal, vertical ou diagonal).", "Professor: use o campo abaixo da grade para digitar palavras personalizadas."],
+  topics: [
+    { icon: "✏️", title: "Ortografia: R/RR, S/SS e NH/LH", desc: "Palavras com dígrafos e encontros", words: ["CARRO", "PASSARO", "COELHO", "GALINHA", "CHUVA", "TERRA", "GIRASSOL", "FOLHA"] },
+    { icon: "🌿", title: "Animais e Natureza", desc: "Fauna, flora e meio ambiente", words: ["FLORESTA", "BORBOLETA", "TARTARUGA", "CACHORRO", "ARVORE", "OCEANO", "PASSARO", "PLANETA"] },
+    { icon: "🍎", title: "Corpo Humano e Saúde", desc: "Hábitos saudáveis e partes do corpo", words: ["CORACAO", "PULMAO", "HIGIENE", "VITAMINA", "ESQUELETO", "DENTES", "ENERGIA", "SAUDE"] }
+  ],
   mount(root, api) {
     const N = 10, DIRS = [[0, 1], [1, 0], [1, 1]], COLS = ["#ffd23f", "#9be7a6", "#ffb3c1", "#a5d8ff", "#d0bfff", "#ffc78f", "#b2f2bb", "#fcc2d7"];
-    const DEF = ["ESCOLA", "ESTUDO", "LIVRO", "CADERNO", "LAPIS", "AMIGO", "LEITURA", "RECREIO"];
-    let words = (Portal._cacaCustom || DEF).slice(), grid, found, start, errs;
+    const baseWords = api.topic ? api.topic.words : Portal.games.find(g => g.id === "caca-palavras").topics[0].words;
+    let words = baseWords.slice(), grid, found, start, errs;
     function build() {
       grid = Array.from({ length: N }, () => Array(N).fill(""));
       const placed = [];
@@ -36,7 +41,7 @@ Portal.register({
         e.preventDefault();
         const l = root.querySelector("#ci").value.split(/[,;\n]+/).map(s => Portal.norm(s).replace(/[^A-Z]/g, "")).filter(s => s.length >= 3 && s.length <= N).slice(0, 8);
         if (l.length < 2) { root.querySelector("#ci").placeholder = "Digite ao menos 2 palavras (3 a 10 letras)"; root.querySelector("#ci").value = ""; return; }
-        Portal._cacaCustom = words = l; build(); draw();
+        words = l; build(); draw();
       };
     }
     function pick(r, c) {
