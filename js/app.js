@@ -40,7 +40,7 @@
     </section>
     <section id="sobre" class="wrap about">
       <h2>Para professores</h2>
-      <p>Cada jogo tem instruções, feedback imediato, pontuação e tela de resultado. Os jogos funcionam em computador, tablet e celular, e os alunos podem jogar quantas vezes quiserem. Nenhum dado pessoal é coletado.</p>
+      <p>Cada jogo permite escolher o tema específico da aula (2º ao 4º ano do Ensino Fundamental), oferecendo instruções, feedback imediato e pontuação. Nenhum dado pessoal é coletado.</p>
     </section>`;
     document.getElementById("q").oninput = e => { q = e.target.value; grid(); };
     chips(); grid();
@@ -65,30 +65,75 @@
   function gameView(id) {
     const g = P.games.find(x => x.id === id);
     if (!g) { location.hash = "#/"; return; }
+    let currentTopic = null;
+
     app().innerHTML = `<section class="gv">
-      <div class="bar"><a class="btn ghost" href="#/">← Início</a><strong>${g.name}</strong><button class="btn ghost" id="rs">↻ Reiniciar</button></div>
+      <div class="bar">
+        <a class="btn ghost" href="#/">← Início</a>
+        <strong id="gtitle">${g.name}</strong>
+        <div style="display:flex;gap:6px">
+          ${g.topics ? `<button class="btn ghost" id="tp" style="display:none">📚 Assuntos</button>` : ""}
+          <button class="btn ghost" id="rs">↻ Reiniciar</button>
+        </div>
+      </div>
       <div id="st" class="stage"></div></section>`;
+
     const st = document.getElementById("st");
-    document.getElementById("rs").onclick = () => start();
+    const tpBtn = document.getElementById("tp");
+    document.getElementById("rs").onclick = () => currentTopic ? start(currentTopic) : intro();
+    if (tpBtn) tpBtn.onclick = () => pickTopic();
     intro();
 
     function intro() {
+      currentTopic = null;
+      if (tpBtn) tpBtn.style.display = "none";
+      document.getElementById("gtitle").textContent = g.name;
       st.innerHTML = `<div class="intro"><div class="big-ico" style="background:${g.color}">${g.icon}</div>
         <h1>${g.name}</h1><p>${g.description}</p>
         <div class="how"><h3>Como jogar</h3><ol>${g.instructions.map(i => `<li>${i}</li>`).join("")}</ol></div>
         <p class="meta">${g.category} · ${g.grade}</p>
-        <button class="btn big" id="go">▶ Iniciar</button></div>`;
-      document.getElementById("go").onclick = start;
+        <button class="btn big" id="go">▶ Escolher assunto</button></div>`;
+      document.getElementById("go").onclick = () => g.topics ? pickTopic() : start(null);
     }
-    function start() { st.innerHTML = ""; g.mount(st, { end }); }
+
+    function pickTopic() {
+      if (tpBtn) tpBtn.style.display = "none";
+      document.getElementById("gtitle").textContent = g.name;
+      st.innerHTML = `<div class="intro">
+        <h2>Escolha o assunto da atividade</h2>
+        <p class="meta">${g.name} · ${g.grade}</p>
+        <div class="topics">${g.topics.map((t, idx) => `
+          <button class="tbtn" data-idx="${idx}">
+            <span>${t.icon || "📘"}</span>
+            <strong>${t.title}</strong>
+            <small>${t.desc}</small>
+          </button>`).join("")}
+        </div>
+      </div>`;
+      st.querySelectorAll(".tbtn").forEach(b => b.onclick = () => start(g.topics[+b.dataset.idx]));
+    }
+
+    function start(topic) {
+      currentTopic = topic;
+      if (tpBtn && g.topics) tpBtn.style.display = "inline-block";
+      document.getElementById("gtitle").textContent = topic ? `${g.name}: ${topic.title}` : g.name;
+      st.innerHTML = "";
+      g.mount(st, { end, topic });
+    }
+
     function end(r) {
       const pct = r.total ? r.hits / r.total : 0, stars = pct >= .9 ? 3 : pct >= .6 ? 2 : pct > 0 ? 1 : 0;
       st.innerHTML = `<div class="intro result"><div class="stars">${"⭐".repeat(stars)}${"☆".repeat(3 - stars)}</div>
         <h1>${pct >= .6 ? "Muito bem!" : "Boa tentativa!"}</h1>
         <div class="stats"><div><b>${r.hits}</b>acertos</div><div><b>${r.errors}</b>erros</div>${r.score != null ? `<div><b>${r.score}</b>pontos</div>` : ""}</div>
         ${r.msg ? `<p>${r.msg}</p>` : ""}
-        <div class="row"><button class="btn big" id="again">↻ Jogar de novo</button><a class="btn ghost big" href="#/">Voltar ao início</a></div></div>`;
-      document.getElementById("again").onclick = start;
+        <div class="row">
+          <button class="btn big" id="again">↻ Jogar de novo</button>
+          ${g.topics ? `<button class="btn ghost big" id="other">📚 Outro assunto</button>` : ""}
+          <a class="btn ghost big" href="#/">Voltar ao início</a>
+        </div></div>`;
+      document.getElementById("again").onclick = () => start(currentTopic);
+      if (g.topics) document.getElementById("other").onclick = pickTopic;
     }
   }
 })();
