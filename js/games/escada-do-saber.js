@@ -1,8 +1,8 @@
 Portal.register({
   id: "escada-do-saber", name: "Escada do Saber", category: "Matemática", grade: "2º ao 4º ano",
   icon: "🪜", color: "linear-gradient(135deg,#7c3aed,#ff7a3d)",
-  description: "Suba a escada de 10 perguntas escolhendo o conteúdo específico de Português, Matemática ou Geografia.",
-  instructions: ["Escolha a matéria e o tema específico.", "Responda cada pergunta escolhendo uma das 4 alternativas.", "Use as ajudas (Pular ou Eliminar duas) quando precisar.", "A estrela marca o ponto seguro de 1000 moedas."],
+  description: "Suba os 10 degraus respondendo desafios de Português, Matemática ou Geografia. Mesmo se errar, você continua até o fim!",
+  instructions: ["Escolha a matéria e o tema específico.", "Responda cada pergunta escolhendo uma das 4 alternativas.", "Se errar, você vê a resposta certa e segue para o próximo degrau.", "Use as ajudas (Pular ou Eliminar duas) quando precisar."],
   topics: [
     {
       subject: "Língua Portuguesa", icon: "✍️", title: "Ortografia: S, Z, SS ou Ç", desc: "Quando usar cada letra corretamente",
@@ -105,17 +105,16 @@ Portal.register({
     const topic = api.topic || Portal.games.find(g => g.id === "escada-do-saber").topics[0];
     const D = topic.questions, RES = topic.reserve.slice();
     const PR = [100, 200, 300, 500, 1000, 2000, 3000, 5000, 7500, 10000];
-    let i = 0, skip = 1, elim = 1, errs = 0, cur = D[0];
-    const done = (prize, msg) => api.end({ hits: i, errors: errs, total: D.length, score: prize, msg });
+    let i = 0, skip = 1, elim = 1, hits = 0, errs = 0, coins = 0, cur = D[0];
+    const done = (msg) => api.end({ hits, errors: errs, total: D.length, score: coins, msg });
     function show() {
       const opts = Portal.shuffle(cur[1].map((t, k) => ({ t, ok: k === 0 })));
       root.innerHTML = `<div class="mil"><div>
-        <div class="hdr"><span>Pergunta ${i + 1} de 10</span><span>Vale ${PR[i]} moedas</span></div>
+        <div class="hdr"><span>Pergunta ${i + 1} de 10</span><span>Acumulado: ${coins} moedas</span></div>
         <div class="board"><p class="big-q">${cur[0]}</p></div>
         <div id="o" class="opts"></div>
         <div class="row"><button class="btn ghost" id="sk" ${skip && RES.length ? "" : "disabled"}>⏭ Pular (${skip})</button>
-        <button class="btn ghost" id="el" ${elim ? "" : "disabled"}>✂ Eliminar duas (${elim})</button>
-        <button class="btn ghost" id="st">✋ Parar com ${i ? PR[i - 1] : 0}</button></div>
+        <button class="btn ghost" id="el" ${elim ? "" : "disabled"}>✂ Eliminar duas (${elim})</button></div>
         <div id="fb" class="fb" aria-live="polite"></div></div>
         <ol class="ladder" aria-label="Escada de prêmios">${PR.map((p, k) => `<li class="${k === i ? "now" : k < i ? "done" : ""}">${p}${k === 4 ? " ⭐" : ""}</li>`).reverse().join("")}</ol></div>`;
       const o = root.querySelector("#o"), btns = opts.map((x, k) => {
@@ -127,19 +126,18 @@ Portal.register({
         elim--; Portal.shuffle(btns.filter((b, k) => !opts[k].ok)).slice(0, 2).forEach(b => b.disabled = true);
         root.querySelector("#el").disabled = true; root.querySelector("#el").textContent = "✂ Eliminar duas (0)";
       };
-      root.querySelector("#st").onclick = () => done(i ? PR[i - 1] : 0, `Você parou e levou ${i ? PR[i - 1] : 0} moedas!`);
       function pick(x, b) {
-        btns.forEach(z => z.disabled = true); root.querySelectorAll("#sk,#el,#st").forEach(z => z.disabled = true);
+        btns.forEach(z => z.disabled = true); root.querySelectorAll("#sk,#el").forEach(z => z.disabled = true);
         btns.forEach((z, k) => { if (opts[k].ok) z.classList.add("ok"); });
         const fb = root.querySelector("#fb");
         if (x.ok) {
+          hits++; coins += PR[i];
           fb.className = "fb good"; fb.innerHTML = `<b>🎉 Resposta certa! +${PR[i]} moedas</b><br><button class="btn" id="nx">${i === 9 ? "Ver resultado" : "Próxima →"}</button>`;
-          fb.querySelector("#nx").onclick = () => { i++; if (i === 10) done(10000, "Você chegou ao topo da escada: 10000 moedas!"); else { cur = D[i]; show(); } };
         } else {
-          errs = 1; b.classList.add("bad"); const prize = i >= 5 ? 1000 : 0;
-          fb.className = "fb wrong"; fb.innerHTML = `<b>😅 Não foi dessa vez.</b><br>Você leva ${prize} moedas.<br><button class="btn" id="nx">Ver resultado</button>`;
-          fb.querySelector("#nx").onclick = () => done(prize, `Você levou ${prize} moedas.`);
+          errs++; b.classList.add("bad");
+          fb.className = "fb wrong"; fb.innerHTML = `<b>😅 Não foi dessa vez! A resposta certa era: ${cur[1][0]}</b><br><button class="btn" id="nx">${i === 9 ? "Ver resultado" : "Continuar →"}</button>`;
         }
+        fb.querySelector("#nx").onclick = () => { i++; if (i === 10) done(`Você completou os 10 degraus com ${coins} moedas!`); else { cur = D[i]; show(); } };
       }
     }
     show();
