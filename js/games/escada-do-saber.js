@@ -1,22 +1,61 @@
 Portal.register({
-  id: "escada-do-saber", name: "Escada do Saber", category: "Conhecimentos Gerais", grade: "3º ao 6º ano",
+  id: "escada-do-saber", name: "Escada do Saber", category: "Matemática", grade: "2º ao 4º ano",
   icon: "🪜", color: "linear-gradient(135deg,#7c3aed,#ff7a3d)",
-  description: "Suba a escada de moedas respondendo perguntas de dificuldade crescente. Use as ajudas na hora do aperto!",
-  instructions: ["Responda cada pergunta escolhendo uma das 4 alternativas.", "Você tem 1 ajuda para pular e 1 para eliminar duas alternativas erradas.", "A estrela marca um ponto seguro: se errar depois dela, você leva 1000 moedas.", "Você pode parar a qualquer momento e guardar o que ganhou."],
+  description: "Suba a escada de moedas respondendo desafios de Matemática, Português ou Conhecimentos Gerais.",
+  instructions: ["Escolha a matéria que deseja praticar.", "Responda cada pergunta escolhendo uma das 4 alternativas.", "Você tem 1 ajuda para pular e 1 para eliminar duas erradas.", "A estrela marca um ponto seguro de 1000 moedas."],
+  topics: [
+    {
+      icon: "🔢", title: "Matemática (2º ao 4º ano)", desc: "Operações, medidas, horas e geometria",
+      questions: [
+        ["Quanto é 15 + 14?", ["29", "28", "30", "25"]],
+        ["Quantos minutos tem 1 hora?", ["60 minutos", "30 minutos", "100 minutos", "45 minutos"]],
+        ["Qual é o dobro de 12?", ["24", "14", "22", "36"]],
+        ["Quantos lados tem um triângulo?", ["3 lados", "4 lados", "5 lados", "6 lados"]],
+        ["Quanto é 6 × 4?", ["24", "20", "28", "18"]],
+        ["Se uma pizza tem 8 fatias e comemos 3, quantas sobram?", ["5 fatias", "4 fatias", "6 fatias", "3 fatias"]],
+        ["Quantos centímetros tem 1 metro?", ["100 cm", "10 cm", "50 cm", "1000 cm"]],
+        ["Qual número representa uma centena e meia?", ["150", "105", "510", "1500"]],
+        ["Quanto é 7 × 8?", ["56", "54", "49", "63"]],
+        ["Dividindo 36 balas igualmente entre 4 crianças, cada uma ganha:", ["9 balas", "8 balas", "6 balas", "12 balas"]]
+      ],
+      reserve: [["Quanto é 100 - 35?", ["65", "75", "55", "60"]]]
+    },
+    {
+      icon: "📖", title: "Língua Portuguesa", desc: "Sílabas, classes de palavras e ortografia",
+      questions: [
+        ["Qual palavra é um substantivo próprio?", ["Brasil", "cidade", "cachorro", "menina"]],
+        ["Quantas sílabas tem a palavra BOR-BO-LE-TA?", ["4 sílabas", "3 sílabas", "5 sílabas", "2 sílabas"]],
+        ["Qual é o antônimo (contrário) de ALEGRE?", ["Triste", "Feliz", "Contente", "Rápido"]],
+        ["Qual palavra está escrita corretamente?", ["Passarinho", "Pasarinho", "Passarrinho", "Paçarinho"]],
+        ["Na frase 'O gato dormiu no sofá', qual palavra indica uma ação (verbo)?", ["dormiu", "gato", "sofá", "no"]],
+        ["Qual é o plural correto de PÃO?", ["Pães", "Pãos", "Pãoses", "Pãezinhos"]],
+        ["Qual palavra é um adjetivo (qualidade)?", ["Carinhoso", "Caderno", "Correr", "Janela"]],
+        ["Antes de P e B usamos sempre a letra:", ["M", "N", "R", "S"]],
+        ["Qual palavra é proparoxítona (sílaba forte na antepenúltima)?", ["Médico", "Café", "Caderno", "Abacaxi"]],
+        ["Qual sinal de pontuação usamos ao final de uma pergunta?", ["Ponto de interrogação (?)", "Ponto final (.)", "Vírgula (,)", "Dois-pontos (:)"]]
+      ],
+      reserve: [["Qual é o feminino de CAVALO?", ["Égua", "Cavala", "Vaca", "Ovelha"]]]
+    },
+    {
+      icon: "🌎", title: "Conhecimentos Gerais", desc: "Brasil, cultura e curiosidades",
+      questions: [
+        ["Quantos dias tem uma semana?", ["7 dias", "5 dias", "6 dias", "8 dias"]],
+        ["Qual é a capital do Brasil?", ["Brasília", "Rio de Janeiro", "São Paulo", "Salvador"]],
+        ["Quem criou a Turma da Mônica?", ["Mauricio de Sousa", "Monteiro Lobato", "Ziraldo", "Ruth Rocha"]],
+        ["Quantos meses tem um ano?", ["12 meses", "10 meses", "11 meses", "13 meses"]],
+        ["Qual é o maior oceano da Terra?", ["Oceano Pacífico", "Oceano Atlântico", "Oceano Índico", "Oceano Ártico"]],
+        ["Em qual continente fica o Brasil?", ["América do Sul", "Europa", "África", "Ásia"]],
+        ["Qual instrumento usamos para verificar os pontos cardeais?", ["Bússola", "Termômetro", "Balança", "Régua"]],
+        ["Quais são as cores da bandeira do Brasil?", ["Verde, amarelo, azul e branco", "Verde, vermelho e branco", "Azul, branco e vermelho", "Amarelo, preto e branco"]],
+        ["Qual é o maior mamífero do mundo?", ["Baleia-azul", "Elefante", "Girafa", "Hipopótamo"]],
+        ["Quem pintou o quadro famoso 'Mona Lisa'?", ["Leonardo da Vinci", "Tarsila do Amaral", "Pablo Picasso", "Vincent van Gogh"]]
+      ],
+      reserve: [["Qual cor obtemos misturando azul e amarelo?", ["Verde", "Roxo", "Laranja", "Rosa"]]]
+    }
+  ],
   mount(root, api) {
-    const D = [
-      ["Qual animal é conhecido como o rei da selva?", ["Leão", "Tigre", "Elefante", "Urso"]],
-      ["Quantos dias tem uma semana?", ["7", "5", "6", "8"]],
-      ["Qual é a capital do Brasil?", ["Brasília", "Rio de Janeiro", "São Paulo", "Salvador"]],
-      ["Quanto é 7 × 8?", ["56", "54", "49", "63"]],
-      ["Qual planeta é chamado de Planeta Vermelho?", ["Marte", "Vênus", "Júpiter", "Saturno"]],
-      ["Qual é o maior oceano da Terra?", ["Pacífico", "Atlântico", "Índico", "Ártico"]],
-      ["Quem criou o Sítio do Picapau Amarelo?", ["Monteiro Lobato", "Machado de Assis", "Ziraldo", "Cecília Meireles"]],
-      ["Qual é o maior mamífero do mundo?", ["Baleia-azul", "Elefante", "Girafa", "Tubarão-branco"]],
-      ["Quantos lados tem um hexágono?", ["6", "5", "7", "8"]],
-      ["Em qual continente fica o Egito?", ["África", "Ásia", "Europa", "Oceania"]]
-    ];
-    const RES = [["Qual cor se obtém misturando azul e amarelo?", ["Verde", "Roxo", "Laranja", "Rosa"]], ["Quantos meses tem um ano?", ["12", "10", "11", "13"]]];
+    const topic = api.topic || Portal.games.find(g => g.id === "escada-do-saber").topics[0];
+    const D = topic.questions, RES = topic.reserve.slice();
     const PR = [100, 200, 300, 500, 1000, 2000, 3000, 5000, 7500, 10000];
     let i = 0, skip = 1, elim = 1, errs = 0, cur = D[0];
     const done = (prize, msg) => api.end({ hits: i, errors: errs, total: D.length, score: prize, msg });
@@ -26,7 +65,7 @@ Portal.register({
         <div class="hdr"><span>Pergunta ${i + 1} de 10</span><span>Vale ${PR[i]} moedas</span></div>
         <div class="board"><p class="big-q">${cur[0]}</p></div>
         <div id="o" class="opts"></div>
-        <div class="row"><button class="btn ghost" id="sk" ${skip ? "" : "disabled"}>⏭ Pular (${skip})</button>
+        <div class="row"><button class="btn ghost" id="sk" ${skip && RES.length ? "" : "disabled"}>⏭ Pular (${skip})</button>
         <button class="btn ghost" id="el" ${elim ? "" : "disabled"}>✂ Eliminar duas (${elim})</button>
         <button class="btn ghost" id="st">✋ Parar com ${i ? PR[i - 1] : 0}</button></div>
         <div id="fb" class="fb" aria-live="polite"></div></div>
