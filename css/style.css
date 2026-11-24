@@ -142,3 +142,27 @@ footer{text-align:center;padding:18px;font-size:.9rem;background:#fff;border-top
 .tbtn .tsub{font-size:.75rem;font-weight:700;background:var(--bg);color:var(--p);padding:2px 9px;border-radius:99px}
 .tbtn strong{font-size:1.02rem;color:var(--ink)}
 .tbtn small{color:#5b5890;font-size:.86rem}
+/* Modo Solo/Equipes, Placar ao Vivo e Memes Finais */
+.team-box{background:var(--bg);border:2px solid var(--line);border-radius:18px;padding:16px;margin:16px 0;text-align:center}
+.team-modes{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:10px 0}
+.tmode{font:inherit;font-weight:700;padding:8px 14px;border-radius:12px;border:2px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+.tmode.on{background:var(--p);border-color:var(--p);color:#fff}
+.team-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:12px}
+.team-inputs input{font:inherit;font-weight:700;padding:9px 12px;border:2px solid var(--line);border-radius:10px;text-align:center}
+.scoreboard{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:14px}
+.tbadge{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:14px;border:2px solid var(--line);background:#fff;font-weight:700;cursor:pointer;transition:transform .15s}
+.tbadge.turn{border-color:var(--o);background:#fff8d6;transform:scale(1.05);box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.tbadge .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.tbadge b{font-size:1.15rem;color:var(--p)}
+.turn-banner{text-align:center;font-weight:700;font-size:.95rem;color:var(--p);margin:-6px 0 10px}
+.meme-card{margin:10px auto 16px;padding:16px;border-radius:20px;background:var(--bg);border:2px dashed var(--line);max-width:340px}
+.meme-anim{font-size:4.2rem;line-height:1.1;display:inline-block}
+.meme-dance{animation:dance .55s infinite alternate ease-in-out}
+.meme-sad{animation:sad 2.2s infinite ease-in-out}
+.meme-clap{animation:bob .8s infinite ease-in-out}
+.meme-caption{font-weight:700;font-size:1.05rem;margin-top:8px;color:var(--ink)}
+.podium{display:flex;flex-direction:column;gap:8px;max-width:400px;margin:14px auto}
+.podium-row{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-radius:12px;background:var(--bg);font-weight:700}
+.podium-row.win{background:#dcf7e8;border:2px solid var(--g);font-size:1.1rem}
+@keyframes dance{0%{transform:rotate(-14deg) translateY(0) scale(1.05)}100%{transform:rotate(14deg) translateY(-10px) scale(1.1)}}
+@keyframes sad{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(6px) rotate(-6deg)}}
