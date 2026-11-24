@@ -166,3 +166,10 @@ footer{text-align:center;padding:18px;font-size:.9rem;background:#fff;border-top
 .podium-row.win{background:#dcf7e8;border:2px solid var(--g);font-size:1.1rem}
 @keyframes dance{0%{transform:rotate(-14deg) translateY(0) scale(1.05)}100%{transform:rotate(14deg) translateY(-10px) scale(1.1)}}
 @keyframes sad{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(6px) rotate(-6deg)}}
+/* Escada visual com degraus e personagem subindo */
+.mil{grid-template-columns:1fr 190px}
+.ladder{gap:5px;padding:8px;background:var(--bg);border-radius:16px;border:2px solid var(--line)}
+.ladder li{position:relative;display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-radius:8px 4px 4px 8px;border-bottom:3px solid rgba(0,0,0,.12);transition:transform .25s ease,background .25s ease;font-size:.82rem}
+.ladder li.now{background:var(--y);transform:scale(1.04);box-shadow:0 3px 8px rgba(0,0,0,.15);z-index:1}
+.climber{display:inline-block;animation:climb .5s infinite alternate ease-in-out;font-size:1.1rem}
+@keyframes climb{0%{transform:translateY(0) rotate(-6deg)}100%{transform:translateY(-4px) rotate(6deg)}}
