@@ -1,12 +1,16 @@
 Portal.register({
   id: "caca-palavras", name: "Caça-Palavras", category: "Língua Portuguesa", grade: "2º ao 4º ano",
   icon: "🔍", color: "linear-gradient(135deg,#4f46e5,#2ab7ca)",
-  description: "Encontre as palavras escondidas na grade escolhendo um tema pedagógico ou criando sua própria lista.",
-  instructions: ["Escolha o tema desejado antes de começar.", "Toque na primeira letra da palavra e depois na última (horizontal, vertical ou diagonal).", "Professor: use o campo abaixo da grade para digitar palavras personalizadas."],
+  description: "Encontre palavras escondidas organizadas por recortes de Ortografia, Geografia, Ciências e Matemática.",
+  instructions: ["Escolha a matéria e o recorte específico da aula.", "Toque na primeira letra da palavra e depois na última (horizontal, vertical ou diagonal).", "Professor: use o campo abaixo da grade para criar um caça-palavras personalizado."],
   topics: [
-    { icon: "✏️", title: "Ortografia: R/RR, S/SS e NH/LH", desc: "Palavras com dígrafos e encontros", words: ["CARRO", "PASSARO", "COELHO", "GALINHA", "CHUVA", "TERRA", "GIRASSOL", "FOLHA"] },
-    { icon: "🌿", title: "Animais e Natureza", desc: "Fauna, flora e meio ambiente", words: ["FLORESTA", "BORBOLETA", "TARTARUGA", "CACHORRO", "ARVORE", "OCEANO", "PASSARO", "PLANETA"] },
-    { icon: "🍎", title: "Corpo Humano e Saúde", desc: "Hábitos saudáveis e partes do corpo", words: ["CORACAO", "PULMAO", "HIGIENE", "VITAMINA", "ESQUELETO", "DENTES", "ENERGIA", "SAUDE"] }
+    { subject: "Língua Portuguesa", icon: "✏️", title: "Ortografia: S, Z, SS ou Ç", desc: "Sons do S e regularidades ortográficas", words: ["PASSARO", "GIRASSOL", "CRIANCAS", "CORACAO", "AZEITONA", "COZINHA", "ACUCAR", "TESOURO"] },
+    { subject: "Língua Portuguesa", icon: "🔤", title: "Ortografia: M antes de P e B", desc: "Regra nasal antes de consoantes", words: ["TAMBOR", "BOMBEIRO", "CAMPO", "LIMPEZA", "SOMBRA", "TEMPO", "POMBA", "EMPADA"] },
+    { subject: "Língua Portuguesa", icon: "📖", title: "Dígrafos: CH, LH e NH", desc: "Encontros de duas letras com um som", words: ["CHOCOLATE", "COELHO", "GALINHA", "CHAVEIRO", "FOLHA", "JOANINHA", "MOCHILA", "ABELHA"] },
+    { subject: "Geografia", icon: "🌳", title: "Biomas Brasileiros", desc: "Paisagens naturais e vegetação do Brasil", words: ["AMAZONIA", "CERRADO", "CAATINGA", "PANTANAL", "PAMPA", "FLORESTA", "CERRADAO", "MANGUE"] },
+    { subject: "Geografia", icon: "🗺️", title: "Paisagem Urbana e Rural", desc: "Elementos do campo e da cidade", words: ["AVENIDA", "LAVOURA", "SEMAFORO", "FAZENDA", "INDUSTRIA", "COLHEITA", "VIADUTO", "ESTRADAS"] },
+    { subject: "Ciências", icon: "💧", title: "Estados e Ciclo da Água", desc: "Transformações da água na natureza", words: ["VAPOR", "NUVEM", "CHUVA", "GELEIRA", "LIQUIDO", "SOLIDO", "OCEANO", "NASCENTE"] },
+    { subject: "Matemática", icon: "📐", title: "Figuras Geométricas", desc: "Formas planas e sólidos geométricos", words: ["TRIANGULO", "QUADRADO", "CIRCULO", "CUBO", "ESFERA", "CILINDRO", "PIRAMIDE", "CONE"] }
   ],
   mount(root, api) {
     const N = 10, DIRS = [[0, 1], [1, 0], [1, 1]], COLS = ["#ffd23f", "#9be7a6", "#ffb3c1", "#a5d8ff", "#d0bfff", "#ffc78f", "#b2f2bb", "#fcc2d7"];
