@@ -1,37 +1,57 @@
 Portal.register({
   id: "forca-dos-baloes", name: "Forca dos Balões", category: "Língua Portuguesa", grade: "2º ao 4º ano",
   icon: "🎈", color: "linear-gradient(135deg,#2ab7ca,#ef476f)",
-  description: "Escolha o tema e descubra as palavras secretas com a ajuda das dicas antes que os balões estourem!",
-  instructions: ["Escolha o assunto das palavras.", "Leia a dica e toque nas letras para formar a palavra.", "Cada letra errada estoura um balão. São 5 balões por palavra."],
+  description: "Descubra palavras-chave de Ortografia, Geografia, Ciências e História antes que os balões estourem!",
+  instructions: ["Escolha a matéria e o recorte desejado.", "Leia a dica e toque nas letras para formar a palavra.", "Cada letra errada estoura um balão (5 balões por palavra)."],
   topics: [
     {
-      icon: "🔤", title: "Dígrafos e Encontros Consonantais", desc: "CH, LH, NH, RR, BR, TR, PL",
+      subject: "Língua Portuguesa", icon: "✏️", title: "Ortografia: S, Z, SS ou Ç", desc: "Treino de grafia com dicas ortográficas",
+      words: [
+        ["PASSARO", "Animal com penas e bico (escrito com SS)", "🐦"],
+        ["CORACAO", "Órgão que bombeia o sangue (escrito com Ç)", "❤️"],
+        ["AZEITONA", "Fruto pequeno usado na pizza (escrito com Z)", "🫒"],
+        ["GIRASSOL", "Flor amarela que segue a luz do Sol (com SS)", "🌻"],
+        ["ACUCAR", "Ingrediente doce usado nos bolos (com Ç)", "🍰"]
+      ]
+    },
+    {
+      subject: "Língua Portuguesa", icon: "🔤", title: "Dígrafos: CH, LH e NH", desc: "Palavras com encontros consonantais",
       words: [
         ["CHOCOLATE", "Doce feito com cacau (escrito com CH)", "🍫"],
         ["ABELHA", "Inseto que produz mel (escrito com LH)", "🐝"],
-        ["JOANINHA", "Pequeno inseto vermelho com pintinhas pretas (com NH)", "🐞"],
-        ["BICICLETA", "Meio de transporte com duas rodas e pedais (com CL)", "🚲"],
-        ["ESTRELA", "Ponto brilhante que vemos no céu à noite (com TR)", "⭐"]
+        ["JOANINHA", "Inseto vermelho de pintinhas pretas (com NH)", "🐞"],
+        ["MOCHILA", "Usada para carregar cadernos e livros (com CH)", "🎒"],
+        ["ESPELHO", "Objeto onde vemos nosso reflexo (com LH)", "🪞"]
       ]
     },
     {
-      icon: "👩‍⚕️", title: "Profissões e Trabalho", desc: "Quem cuida, ensina e constrói",
+      subject: "Geografia", icon: "🌎", title: "Biomas e Paisagens do Brasil", desc: "Vegetação e regiões naturais",
       words: [
-        ["PROFESSORA", "Ensina os alunos na escola", "👩‍🏫"],
-        ["DENTISTA", "Cuida da saúde dos nossos dentes", "🦷"],
-        ["BOMBEIRO", "Apaga incêndios e faz resgates", "🚒"],
-        ["VETERINARIO", "Médico que cuida dos animais", "🐾"],
-        ["CARTEIRO", "Entrega cartas e encomendas nas casas", "✉️"]
+        ["AMAZONIA", "Maior floresta tropical do Brasil e do mundo", "🌳"],
+        ["CAATINGA", "Bioma exclusivo do Brasil com clima semiárido e cactos", "🌵"],
+        ["PANTANAL", "Maior planície alagável do mundo, rica em aves e jacarés", "🐊"],
+        ["CERRADO", "Bioma do centro do Brasil com árvores de troncos retorcidos", "🌾"],
+        ["OCEANO", "Grande extensão de água salgada que banha o litoral", "🌊"]
       ]
     },
     {
-      icon: "🚀", title: "Transportes e Comunicação", desc: "Como nos locomovemos e conversamos",
+      subject: "Ciências", icon: "🪐", title: "Sistema Solar e Universo", desc: "Astros, planetas e movimentos da Terra",
       words: [
-        ["HELICOPTERO", "Voa usando hélices no topo", "🚁"],
-        ["SUBMARINO", "Navega embaixo da água do mar", "🌊"],
-        ["TELEFONE", "Aparelho usado para conversar à distância", "📞"],
-        ["AMBULANCIA", "Veículo que leva pacientes ao hospital", "🚑"],
-        ["COMPUTADOR", "Máquina usada para estudar, escrever e pesquisar", "💻"]
+        ["ESTRELA", "Astro que possui luz própria, como o Sol", "⭐"],
+        ["PLANETA", "Astro sem luz própria que gira ao redor de uma estrela", "🪐"],
+        ["ROTACAO", "Movimento que a Terra faz em torno de si mesma", "🌍"],
+        ["SATELITE", "A Lua é o único natural da Terra", "🌙"],
+        ["GRAVIDADE", "Força que nos mantém com os pés no chão", "🍎"]
+      ]
+    },
+    {
+      subject: "História", icon: "🏛️", title: "Cidadania e Patrimônio Cultural", desc: "Memória, cultura e convivência",
+      words: [
+        ["MUSEU", "Lugar que guarda objetos e memórias da história", "🏛️"],
+        ["FOLCLORE", "Conjunto de lendas, festas e danças populares", "🎭"],
+        ["INDIGENA", "Povos originários que já viviam no Brasil antes de 1500", "🪶"],
+        ["DIREITOS", "Tudo aquilo que garante respeito e dignidade ao cidadão", "📜"],
+        ["MUNICIPIO", "Divisão administrativa formada pela zona urbana e rural", "🏙️"]
       ]
     }
   ],
